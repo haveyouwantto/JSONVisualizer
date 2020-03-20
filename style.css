@@ -39,7 +39,8 @@ html{
 	/* Safari */
     transition-duration:0.4s;
     max-width: max-content;
-    margin: 5px auto;
+	margin: 5px auto;
+	margin-left: 5px;
 }
 .btn:disabled{
 	background-color:rgb(128, 128, 128);

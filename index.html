@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="shortcut  icon" type="image/x-icon" href="favicon.ico" media="screen"  />
+    <link rel="shortcut  icon" type="image/x-icon" href="favicon.ico" media="screen" />
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <link href="style.css" rel="stylesheet">
     <title>JSON树状图生成器</title>
@@ -14,27 +14,30 @@
         主题: <select id="themes" class="input"></select>
         字体: <input type="text" class="input" id="font" value="monospace">
         大小: <input type="number" class="input" id="resolution" value="32" min="1"><br>
-        <textarea id="text" class="input" rows=8 cols=60 placeholder="来一段JSON"></textarea><br>
-        <button id="submit" class="btn">提交</button>
+        <textarea id="text" class="input" rows=8 cols=60 placeholder="来一段JSON"></textarea>
+        <div>
+            <button id="submit" class="btn">提交</button>
+            <button id="clear" class="btn">清除</button>
+        </div>
     </span>
     <span class="canvas">
         <canvas id="canvas" width="256" height="256"></canvas>
     </span>
-    <div class="typeimg">
-        <img id="object">
-        <img id="array">
-        <img id="number">
-        <img id="string">
-        <img id="boolean">
-    </div>
     <script src="theme.js"></script>
     <script src="draw.js"></script>
+    <script src="download.js"></script>
     <script>
         let submit = document.getElementById('submit');
+        let clear = document.getElementById('clear');
         let textarea = document.getElementById('text');
         submit.addEventListener("click", () => {
             {
                 draw(textarea.value);
+            }
+        });
+        clear.addEventListener("click", () => {
+            {
+                textarea.value = '';
             }
         });
     </script>

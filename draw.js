@@ -7,7 +7,7 @@ let ctx = c.getContext("2d");
 let line = 0;
 let theme = '';
 let fontname = '';
-let indent = 1.2;
+let indent = 1;
 
 let layers = [];
 
@@ -42,11 +42,11 @@ function draw(json) {
 }
 
 let typeicons = {
-    object: document.getElementById('object'),
-    array: document.getElementById('array'),
-    number: document.getElementById('number'),
-    string: document.getElementById('string'),
-    boolean: document.getElementById('boolean')
+    object: new Image(),
+    array: new Image(),
+    number: new Image(),
+    string: new Image(),
+    boolean: new Image()
 }
 function loadIcons() {
     typeicons.object.src = theme.icons.object;

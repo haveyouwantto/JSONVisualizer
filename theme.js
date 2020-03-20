@@ -16,7 +16,7 @@ let themes = {
             "string": "img/idea/string.png",
             "boolean": "img/idea/boolean.png"
         }
-    },"plain": {
+    }, "plain": {
         "name": "Plain",
         "backgroundColor": "#ffffff",
         "branchColor": "#808080",
@@ -32,6 +32,23 @@ let themes = {
             "number": "img/plain/number.png",
             "string": "img/plain/string.png",
             "boolean": "img/plain/boolean.png"
+        }
+    }, "blocktopgraph": {
+        "name": "Blocktopgraph Styled",
+        "backgroundColor": "#fafafa",
+        "branchColor": "#b0b0b0",
+        "textColor": "#a0a0a0",
+        "keyColor": "#737373",
+        "stringColor": "#000000",
+        "numberColor": "#000000",
+        "colonColor": "#000000",
+        "keywordColor": "#000000",
+        "icons": {
+            "object": "img/blocktopgraph/ic_tag_compound.png",
+            "array": "img/blocktopgraph/ic_tag_list.png",
+            "number": "img/blocktopgraph/number.png",
+            "string": "img/blocktopgraph/ic_tag_string.png",
+            "boolean": "img/blocktopgraph/ic_tag_byte.png"
         }
     }
 }
