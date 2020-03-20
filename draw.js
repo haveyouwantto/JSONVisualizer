@@ -1,10 +1,12 @@
 let c = document.getElementById("canvas");
 let res = document.getElementById('resolution');
+let f = document.getElementById('font');
 let resolution = 16;
 let offset = 0;
 let ctx = c.getContext("2d");
 let line = 0;
 let theme = '';
+let fontname = '';
 
 let layers = [];
 
@@ -19,17 +21,18 @@ function draw(json) {
             resolution = parseInt(res.value);
             line = 0;
             offset = resolution / 8;
+            fontname = f.value;
 
             let dimension = getDimension(obj);
             console.log(dimension);
 
-            ctx.font = resolution + "px Inconsolata";
+            ctx.font = resolution + "px "+fontname;
             let measure = ctx.measureText(dimension[1]);
             c.width = measure.width + resolution * (dimension[2] + 1);
             c.height = resolution * (dimension[0] + 1);
             ctx.fillStyle = theme.backgroundColor;
             ctx.fillRect(0, 0, c.width, c.height);
-            ctx.font = resolution + "px Inconsolata";
+            ctx.font = resolution + "px "+fontname;
             parseType(obj, 0);
         } catch (e) {
             alert('JSON语法错误:\n' + e);
@@ -158,7 +161,7 @@ function parseType(obj, depth, key = '', lastItem = false) {
         ctx.fillStyle = theme.colonColor;
         ctx.fillText(': ', valueX, textY);
         ctx.fillStyle = theme.stringColor;
-        ctx.fillText('"' + obj + '"', valueXColon, textY);
+        ctx.fillText(JSON.stringify(obj), valueXColon, textY);
 
     } else if (type == '[object Boolean]') {
         ctx.drawImage(typeicons.boolean, imageX, imageY, imageOffset, imageOffset);
