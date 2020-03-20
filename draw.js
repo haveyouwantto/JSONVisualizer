@@ -7,6 +7,7 @@ let ctx = c.getContext("2d");
 let line = 0;
 let theme = '';
 let fontname = '';
+let indent = 1.2;
 
 let layers = [];
 
@@ -26,13 +27,12 @@ function draw(json) {
             let dimension = getDimension(obj);
             console.log(dimension);
 
-            ctx.font = resolution + "px "+fontname;
+            ctx.font = resolution + "px " + fontname;
             let measure = ctx.measureText(dimension[1]);
             c.width = measure.width + resolution * (dimension[2] + 1);
             c.height = resolution * (dimension[0] + 1);
             ctx.fillStyle = theme.backgroundColor;
             ctx.fillRect(0, 0, c.width, c.height);
-            ctx.font = resolution + "px "+fontname;
             parseType(obj, 0);
         } catch (e) {
             alert('JSON语法错误:\n' + e);
@@ -117,11 +117,12 @@ function parseType(obj, depth, key = '', lastItem = false) {
     drawBranch(line, depth, lastItem);
     layers[depth - 1] = lastItem ? 0 : 1;
 
+    ctx.font = (resolution - 4) + "px " + fontname;
     ctx.fillStyle = theme.textColor;
-    let imageX = depth * resolution * 1.5 + offset;
+    let imageX = (depth + 0.5) * resolution * indent - offset;
     let imageY = (line - 1) * resolution + offset * 2;
     let imageOffset = resolution - offset;
-    let textX = (depth + 1) * resolution * 1.5;
+    let textX = (depth + 1.5) * resolution * indent;
     let valueX = textX + ctx.measureText(key).width;
     let valueXColon = textX + ctx.measureText(key + ': ').width;
     let textY = line * resolution;
@@ -202,16 +203,17 @@ function drawArray(arr, depth) {
 
 function drawBranch(l, depth) {
     ctx.fillStyle = theme.branchColor;
+    ctx.font = resolution + "px " + fontname;
     for (let i = 0; i < depth; i++) {
         switch (layers[i]) {
             case 1:
-                ctx.fillText('│', i * resolution * 1.5, l * resolution);
+                ctx.fillText('│', (i + 0.5) * resolution * indent, l * resolution);
                 break;
             case 2:
-                ctx.fillText('├', i * resolution * 1.5, l * resolution);
+                ctx.fillText('├', (i + 0.5) * resolution * indent, l * resolution);
                 break;
             case 3:
-                ctx.fillText('└', i * resolution * 1.5, l * resolution);
+                ctx.fillText('└', (i + 0.5) * resolution * indent, l * resolution);
                 break;
             default:
                 break;
