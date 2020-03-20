@@ -29,7 +29,7 @@ function draw(json) {
 
             ctx.font = resolution + "px " + fontname;
             let measure = ctx.measureText(dimension[1]);
-            c.width = measure.width + resolution * (dimension[2] + 1);
+            c.width = measure.width;
             c.height = resolution * (dimension[0] + 1);
             ctx.fillStyle = theme.backgroundColor;
             ctx.fillRect(0, 0, c.width, c.height);

@@ -20,7 +20,7 @@
             <button id="clear" class="btn">清除</button>
         </div>
     </span>
-    <span id='dls'><a id='dl'>下载</a></span>
+    <a id='dl'>下载</a>
     <span class="canvas">
         <canvas id="canvas" width="256" height="256"></canvas>
     </span>
@@ -34,7 +34,7 @@
         let dl = document.getElementById('dl');
         let dls = document.getElementById('dls');
         submit.addEventListener("click", () => {
-            dls.style.display = 'block';
+            dl.style.display = 'block';
             draw(textarea.value);
         });
         clear.addEventListener("click", () => {

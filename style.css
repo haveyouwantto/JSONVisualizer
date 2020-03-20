@@ -73,11 +73,9 @@ html{
 	margin: 4px;
 	max-width: 90%;
 }
-.dls{
-	display: none;
-}
 #dl{
 	color: rgb(130, 192, 255);
 	margin: 8px;
+	display: none;
 	cursor: pointer;
 }
