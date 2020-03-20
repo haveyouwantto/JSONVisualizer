@@ -25,7 +25,7 @@ function draw(json) {
 
             ctx.font = resolution + "px Inconsolata";
             let measure = ctx.measureText(dimension[1]);
-            c.width = measure.width + resolution * (dimension[2]);
+            c.width = measure.width + resolution * (dimension[2] + 1);
             c.height = resolution * (dimension[0] + 1);
             ctx.fillStyle = theme.backgroundColor;
             ctx.fillRect(0, 0, c.width, c.height);
@@ -62,7 +62,8 @@ function getDimension(obj, key, depth = 0) {
     let longest = '';
     let str = '';
     let maxdepth = depth;
-    if (type != '[object Array]' && type != '[object Null]') str = fill(depth + 2) + key + ': ' + obj.toString();
+    if (type != '[object Array]' && type != '[object Null]' && type != '[object Object]') str = fill(depth + 2) + key + ': ' + obj.toString();
+    else str = fill(depth + 2) + key + ': x entries';
     if (type == '[object Object]') {
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
