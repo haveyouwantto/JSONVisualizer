@@ -3,7 +3,7 @@ let themes = {
         "name": "IDEA",
         "backgroundColor": "#2b2b2b",
         "branchColor": "#606366",
-        "textColor": "#a9b7c6",
+        "textColor": "#808080",
         "keyColor": "#9876aa",
         "stringColor": "#6a8759",
         "numberColor": "#6897bb",
@@ -14,7 +14,8 @@ let themes = {
             "array": "img/idea/array.png",
             "number": "img/idea/number.png",
             "string": "img/idea/string.png",
-            "boolean": "img/idea/boolean.png"
+            "boolean": "img/idea/boolean.png",
+            "nullobj": "img/idea/nullobj.png"
         }
     }, "plain": {
         "name": "Plain",
@@ -31,7 +32,8 @@ let themes = {
             "array": "img/plain/array.png",
             "number": "img/plain/number.png",
             "string": "img/plain/string.png",
-            "boolean": "img/plain/boolean.png"
+            "boolean": "img/plain/boolean.png",
+            "nullobj": "img/plain/nullobj.png"
         }
     }, "blocktopgraph": {
         "name": "Blocktopgraph Styled",
@@ -48,7 +50,26 @@ let themes = {
             "array": "img/blocktopgraph/ic_tag_list.png",
             "number": "img/blocktopgraph/number.png",
             "string": "img/blocktopgraph/ic_tag_string.png",
-            "boolean": "img/blocktopgraph/ic_tag_byte.png"
+            "boolean": "img/blocktopgraph/ic_tag_byte.png",
+            "nullobj": "img/blocktopgraph/ic_tag_default.png"
+        }
+    }, "vscode": {
+        "name": "Visual Studio Code",
+        "backgroundColor": "#1e1e1e",
+        "branchColor": "#404040",
+        "textColor": "#6a9955",
+        "keyColor": "#9cdcfe",
+        "stringColor": "#ce9178",
+        "numberColor": "#b5cea8",
+        "colonColor": "#d4d4d4",
+        "keywordColor": "#569cd6",
+        "icons": {
+            "object": "img/vscode/object.png",
+            "array": "img/vscode/array.png",
+            "number": "img/vscode/number.png",
+            "string": "img/vscode/string.png",
+            "boolean": "img/vscode/boolean.png",
+            "nullobj": "img/vscode/nullobj.png"
         }
     }
 }
@@ -72,7 +93,8 @@ let typeicons = {
     array: new Image(),
     number: new Image(),
     string: new Image(),
-    boolean: new Image()
+    boolean: new Image(),
+    nullobj: new Image()
 }
 let theme = '';
 
@@ -82,6 +104,7 @@ function loadIcons() {
     typeicons.number.src = theme.icons.number;
     typeicons.string.src = theme.icons.string;
     typeicons.boolean.src = theme.icons.boolean;
+    typeicons.nullobj.src = theme.icons.nullobj;
 }
 
 theme = themes[select.selectedOptions[0].value];

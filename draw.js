@@ -28,7 +28,7 @@ function draw(json) {
         if (dimension[0] * resolution > 0x4000 || measure.width > 0x4000) {
             alert('图片尺寸超过16384像素，您的浏览器可能无法正常显示。');
         }
-        c.width = measure.width;
+        c.width = measure.width + offset;
         c.height = resolution * (dimension[0] + 1);
         ctx.fillStyle = theme.backgroundColor;
         ctx.fillRect(0, 0, c.width, c.height);
@@ -107,7 +107,7 @@ function formatLength(len) {
     if (len == 1) return len + ' entry';
     else return len + ' entries';
 }
-
+c
 function parseType(obj, depth, key = '', lastItem = false) {
     let type = getType(obj);
     line++;
@@ -174,7 +174,7 @@ function parseType(obj, depth, key = '', lastItem = false) {
         ctx.fillText(obj, valueXColon, textY);
 
     } else if (type == '[object Null]') {
-        ctx.drawImage(typeicons.object, imageX, imageY, imageOffset, imageOffset);
+        ctx.drawImage(typeicons.nullobj, imageX, imageY, imageOffset, imageOffset);
         ctx.fillStyle = theme.keyColor;
         ctx.fillText(key, textX, textY);
         ctx.fillStyle = theme.colonColor;
