@@ -20,10 +20,14 @@ function draw(json) {
         fontname = f.value;
 
         let dimension = getDimension(obj);
-        console.log(dimension);
 
-        ctx.font = resolution + "px " + fontname;
+        ctx.font = (resolution - 4) + "px " + fontname;
         let measure = ctx.measureText(dimension[1]);
+        console.log(dimension, measure);
+
+        if (dimension[0] * resolution > 0x4000 || measure.width > 0x4000) {
+            alert('图片尺寸超过16384像素，您的浏览器可能无法正常显示。');
+        }
         c.width = measure.width;
         c.height = resolution * (dimension[0] + 1);
         ctx.fillStyle = theme.backgroundColor;
@@ -46,8 +50,13 @@ function getDimension(obj, key, depth = 0) {
     let longest = '';
     let str = '';
     let maxdepth = depth;
-    if (type != '[object Array]' && type != '[object Null]' && type != '[object Object]') str = fill(depth + 2) + key + ': ' + obj.toString();
-    else str = fill(depth + 2) + key + ': x entries';
+    if (type != '[object Array]' && type != '[object Null]' && type != '[object Object]') {
+        if (type == '[object String]')
+            str = fill(depth + 2) + '"' + key + '": ' + JSON.stringify(obj);
+        else
+            str = fill(depth + 2) + '"' + key + '": ' + obj;
+    }
+    else str = fill(depth + 2) + '"' + key + '": xxx entries';
     if (type == '[object Object]') {
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
@@ -75,7 +84,7 @@ function getDimension(obj, key, depth = 0) {
 function fill(count) {
     let out = '';
     for (let i = 0; i < count; i++) {
-        out += '  ';
+        out += '00';
     }
     return out;
 }
@@ -113,7 +122,7 @@ function parseType(obj, depth, key = '', lastItem = false) {
     let imageX = (depth + 0.5) * indent - offset;
     let imageY = (line - 1) * resolution + offset * 2;
     let imageOffset = resolution - offset;
-    let textX = (depth + 1.5) * indent;
+    let textX = (depth + 1.5) * indent + offset;
     let valueX = textX + ctx.measureText(key).width;
     let valueXColon = textX + ctx.measureText(key + ': ').width;
     let textY = line * resolution;
@@ -198,13 +207,13 @@ function drawBranch(l, depth) {
     for (let i = 0; i < depth; i++) {
         switch (layers[i]) {
             case 1:
-                ctx.fillText('│', (i + 0.5) * indent - offset * 2, l * resolution);
+                ctx.fillText('│', (i + 0.5) * indent - offset, l * resolution);
                 break;
             case 2:
-                ctx.fillText('├', (i + 0.5) * indent - offset * 2, l * resolution);
+                ctx.fillText('├', (i + 0.5) * indent - offset, l * resolution);
                 break;
             case 3:
-                ctx.fillText('└', (i + 0.5) * indent - offset * 2, l * resolution);
+                ctx.fillText('└', (i + 0.5) * indent - offset, l * resolution);
                 break;
             default:
                 break;
