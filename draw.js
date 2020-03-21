@@ -6,7 +6,7 @@ let offset = 0;
 let ctx = c.getContext("2d");
 let line = 0;
 let fontname = '';
-let indent = 1;
+let indent = 0;
 
 let layers = [];
 
@@ -28,6 +28,9 @@ function draw(json) {
         c.height = resolution * (dimension[0] + 1);
         ctx.fillStyle = theme.backgroundColor;
         ctx.fillRect(0, 0, c.width, c.height);
+
+        ctx.font = (resolution - 4) + "px " + fontname;
+        indent = ctx.measureText('00').width;
 
         dl.style.display = 'block';
         parseType(obj, 0);
@@ -107,10 +110,10 @@ function parseType(obj, depth, key = '', lastItem = false) {
 
     ctx.font = (resolution - 4) + "px " + fontname;
     ctx.fillStyle = theme.textColor;
-    let imageX = (depth + 0.5) * resolution * indent - offset;
+    let imageX = (depth + 0.5) * indent - offset;
     let imageY = (line - 1) * resolution + offset * 2;
     let imageOffset = resolution - offset;
-    let textX = (depth + 1.5) * resolution * indent;
+    let textX = (depth + 1.5) * indent;
     let valueX = textX + ctx.measureText(key).width;
     let valueXColon = textX + ctx.measureText(key + ': ').width;
     let textY = line * resolution;
@@ -195,13 +198,13 @@ function drawBranch(l, depth) {
     for (let i = 0; i < depth; i++) {
         switch (layers[i]) {
             case 1:
-                ctx.fillText('│', (i + 0.5) * resolution * indent, l * resolution);
+                ctx.fillText('│', (i + 0.5) * indent - offset * 2, l * resolution);
                 break;
             case 2:
-                ctx.fillText('├', (i + 0.5) * resolution * indent, l * resolution);
+                ctx.fillText('├', (i + 0.5) * indent - offset * 2, l * resolution);
                 break;
             case 3:
-                ctx.fillText('└', (i + 0.5) * resolution * indent, l * resolution);
+                ctx.fillText('└', (i + 0.5) * indent - offset * 2, l * resolution);
                 break;
             default:
                 break;
