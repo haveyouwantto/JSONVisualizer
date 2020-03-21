@@ -51,7 +51,7 @@ function getDimension(obj, key, depth = 0) {
                 const element = obj[key];
                 let ret = getDimension(element, key, depth + 1);
                 height += ret[0];
-                if (ret[1].length > longest.length) longest = ret[1];
+                if (getLength(ret[1]) > getLength(longest)) longest = ret[1];
                 if (ret[2] > maxdepth) maxdepth = ret[2];
             }
         }
@@ -60,11 +60,11 @@ function getDimension(obj, key, depth = 0) {
             const element = obj[i];
             let ret = getDimension(element, i, depth + 1);
             height += ret[0];
-            if (ret[1].length > longest.length) longest = ret[1];
+            if (getLength(ret[1]) > getLength(longest)) longest = ret[1];
             if (ret[2] > maxdepth) maxdepth = ret[2];
         }
     }
-    if (str.length > longest.length) longest = str;
+    if (getLength(str) > getLength(longest)) longest = str;
     if (depth > maxdepth) maxdepth = depth;
     return [height, longest, maxdepth];
 }
@@ -79,6 +79,16 @@ function fill(count) {
 
 function getType(obj) {
     return Object.prototype.toString.call(obj);
+}
+
+function getLength(str) {
+    let out = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 0xff)
+            out += 2;
+        else out++;
+    }
+    return out;
 }
 
 function formatLength(len) {
