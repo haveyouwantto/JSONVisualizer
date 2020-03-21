@@ -74,6 +74,8 @@ let typeicons = {
     string: new Image(),
     boolean: new Image()
 }
+let theme = '';
+
 function loadIcons() {
     typeicons.object.src = theme.icons.object;
     typeicons.array.src = theme.icons.array;

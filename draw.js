@@ -5,7 +5,6 @@ let resolution = 16;
 let offset = 0;
 let ctx = c.getContext("2d");
 let line = 0;
-let theme = '';
 let fontname = '';
 let indent = 1;
 
