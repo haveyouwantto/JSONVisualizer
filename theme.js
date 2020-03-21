@@ -61,3 +61,26 @@ for (const key in themes) {
     option.innerText = element.name;
     select.appendChild(option);
 }
+select.addEventListener('change', () => {
+    theme = themes[select.selectedOptions[0].value];
+    console.log(1);
+    loadIcons();
+});
+
+let typeicons = {
+    object: new Image(),
+    array: new Image(),
+    number: new Image(),
+    string: new Image(),
+    boolean: new Image()
+}
+function loadIcons() {
+    typeicons.object.src = theme.icons.object;
+    typeicons.array.src = theme.icons.array;
+    typeicons.number.src = theme.icons.number;
+    typeicons.string.src = theme.icons.string;
+    typeicons.boolean.src = theme.icons.boolean;
+}
+
+theme = themes[select.selectedOptions[0].value];
+loadIcons();

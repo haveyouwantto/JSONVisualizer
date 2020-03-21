@@ -12,52 +12,31 @@ let indent = 1;
 let layers = [];
 
 function draw(json) {
+    try {
+        let obj = JSON.parse(json);
 
-    theme = themes[select.selectedOptions[0].value];
-    loadIcons();
-    setTimeout(() => {
-        try {
-            let obj = JSON.parse(json);
+        resolution = parseInt(res.value);
+        line = 0;
+        offset = resolution / 8;
+        fontname = f.value;
 
-            resolution = parseInt(res.value);
-            line = 0;
-            offset = resolution / 8;
-            fontname = f.value;
+        let dimension = getDimension(obj);
+        console.log(dimension);
 
-            let dimension = getDimension(obj);
-            console.log(dimension);
+        ctx.font = resolution + "px " + fontname;
+        let measure = ctx.measureText(dimension[1]);
+        c.width = measure.width;
+        c.height = resolution * (dimension[0] + 1);
+        ctx.fillStyle = theme.backgroundColor;
+        ctx.fillRect(0, 0, c.width, c.height);
 
-            ctx.font = resolution + "px " + fontname;
-            let measure = ctx.measureText(dimension[1]);
-            c.width = measure.width;
-            c.height = resolution * (dimension[0] + 1);
-            ctx.fillStyle = theme.backgroundColor;
-            ctx.fillRect(0, 0, c.width, c.height);
-            parseType(obj, 0);
-        } catch (e) {
-            alert('JSON语法错误:\n' + e);
-            console.error(e.stack);
-        }
-    }, 100);
+        dl.style.display = 'block';
+        parseType(obj, 0);
+    } catch (e) {
+        alert('JSON语法错误:\n' + e);
+        console.error(e.stack);
+    }
 }
-
-let typeicons = {
-    object: new Image(),
-    array: new Image(),
-    number: new Image(),
-    string: new Image(),
-    boolean: new Image()
-}
-function loadIcons() {
-    typeicons.object.src = theme.icons.object;
-    typeicons.array.src = theme.icons.array;
-    typeicons.number.src = theme.icons.number;
-    typeicons.string.src = theme.icons.string;
-    typeicons.boolean.src = theme.icons.boolean;
-}
-
-theme = themes[select.selectedOptions[0].value];
-loadIcons();
 
 function getDimension(obj, key, depth = 0) {
     let type = getType(obj);
