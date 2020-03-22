@@ -75,7 +75,9 @@ html{
 }
 #dl{
 	color: rgb(130, 192, 255);
-	margin: 8px;
 	display: none;
 	cursor: pointer;
+	margin: auto;
+	max-width: fit-content;
+	padding: 5px;
 }
