@@ -121,7 +121,7 @@ function parseType(obj, depth, key = '', lastItem = false) {
     ctx.fillStyle = theme.textColor;
     let imageX = (depth + 0.5) * indent - offset;
     let imageY = (line - 1) * resolution + offset * 2;
-    let imageOffset = resolution - offset;
+    let imageOffset = theme.resizeIcon ? resolution - offset : resolution;
     let textX = (depth + 1.5) * indent + offset;
     let valueX = textX + ctx.measureText(key).width;
     let valueXColon = textX + ctx.measureText(key + ': ').width;

@@ -9,6 +9,7 @@ let themes = {
         "numberColor": "#6897bb",
         "colonColor": "#cc7832",
         "keywordColor": "#cc7832",
+        "resizeIcon": true,
         "icons": {
             "object": "img/idea/object.png",
             "array": "img/idea/array.png",
@@ -27,6 +28,7 @@ let themes = {
         "numberColor": "#0000ff",
         "colonColor": "#000000",
         "keywordColor": "#ff0000",
+        "resizeIcon": true,
         "icons": {
             "object": "img/plain/object.png",
             "array": "img/plain/array.png",
@@ -45,6 +47,7 @@ let themes = {
         "numberColor": "#000000",
         "colonColor": "#000000",
         "keywordColor": "#000000",
+        "resizeIcon": false,
         "icons": {
             "object": "img/blocktopgraph/ic_tag_compound.png",
             "array": "img/blocktopgraph/ic_tag_list.png",
@@ -63,6 +66,7 @@ let themes = {
         "numberColor": "#b5cea8",
         "colonColor": "#d4d4d4",
         "keywordColor": "#569cd6",
+        "resizeIcon": true,
         "icons": {
             "object": "img/vscode/object.png",
             "array": "img/vscode/array.png",
@@ -81,6 +85,7 @@ let themes = {
         "numberColor": "#ff00ff",
         "colonColor": "#ffffff",
         "keywordColor": "#ffcc00",
+        "resizeIcon": false,
         "icons": {
             "object": "img/neon/object.png",
             "array": "img/neon/array.png",
