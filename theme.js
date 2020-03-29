@@ -71,6 +71,24 @@ let themes = {
             "boolean": "img/vscode/boolean.png",
             "nullobj": "img/vscode/nullobj.png"
         }
+    }, "vector": {
+        "name": "Vector",
+        "backgroundColor": "#000000",
+        "branchColor": "#a0a0a0",
+        "textColor": "#a0a0a0",
+        "keyColor": "#c7c7c7",
+        "stringColor": "#00ff00",
+        "numberColor": "#ff00ff",
+        "colonColor": "#ffffff",
+        "keywordColor": "#ffcc00",
+        "icons": {
+            "object": "img/neon/object.png",
+            "array": "img/neon/array.png",
+            "number": "img/neon/number.png",
+            "string": "img/neon/string.png",
+            "boolean": "img/neon/boolean.png",
+            "nullobj": "img/neon/nullobj.png"
+        }
     }
 }
 
