@@ -41,7 +41,7 @@ let themes = {
         "name": "Blocktopgraph Styled",
         "backgroundColor": "#fafafa",
         "branchColor": "#b0b0b0",
-        "textColor": "#a0a0a0",
+        "textColor": "#808080",
         "keyColor": "#737373",
         "stringColor": "#000000",
         "numberColor": "#000000",
@@ -75,7 +75,8 @@ let themes = {
             "boolean": "img/vscode/boolean.png",
             "nullobj": "img/vscode/nullobj.png"
         }
-    }, "vector": {
+    },
+    "vector": {
         "name": "Vector",
         "backgroundColor": "#000000",
         "branchColor": "#a0a0a0",
@@ -87,12 +88,32 @@ let themes = {
         "keywordColor": "#ffcc00",
         "resizeIcon": false,
         "icons": {
-            "object": "img/neon/object.png",
-            "array": "img/neon/array.png",
-            "number": "img/neon/number.png",
-            "string": "img/neon/string.png",
-            "boolean": "img/neon/boolean.png",
-            "nullobj": "img/neon/nullobj.png"
+            "object": "img/vector/object.png",
+            "array": "img/vector/array.png",
+            "number": "img/vector/number.png",
+            "string": "img/vector/string.png",
+            "boolean": "img/vector/boolean.png",
+            "nullobj": "img/vector/nullobj.png"
+        }
+    },
+    "minecraftia": {
+        "name": "Minecraftia",
+        "backgroundColor": "#00000080",
+        "branchColor": "#a7a7a7",
+        "textColor": "#fbfbfb",
+        "keyColor": "#54fbfb",
+        "stringColor": "#54fb54",
+        "numberColor": "#fba700",
+        "colonColor": "#fbfbfb",
+        "keywordColor": "#fb5454",
+        "resizeIcon": false,
+        "icons": {
+            "object": "img/minecraftia/object.png",
+            "array": "img/minecraftia/array.png",
+            "number": "img/minecraftia/number.png",
+            "string": "img/minecraftia/string.png",
+            "boolean": "img/minecraftia/boolean.png",
+            "nullobj": "img/minecraftia/nullobj.png"
         }
     }
 }
@@ -105,11 +126,48 @@ for (const key in themes) {
     option.innerText = element.name;
     select.appendChild(option);
 }
-select.addEventListener('change', () => {
+
+function loadIcons() {
+    typeicons.object.src = theme.icons.object;
+    typeicons.array.src = theme.icons.array;
+    typeicons.number.src = theme.icons.number;
+    typeicons.string.src = theme.icons.string;
+    typeicons.boolean.src = theme.icons.boolean;
+    typeicons.nullobj.src = theme.icons.nullobj;
+}
+
+function loadTheme() {
     theme = themes[select.selectedOptions[0].value];
-    console.log(1);
     loadIcons();
-});
+    changeStyle('html', 'backgroundColor', theme.backgroundColor);
+    changeStyle('html', 'color', theme.textColor);
+    changeStyle('.text', 'color', theme.textColor);
+    changeStyle('.border', 'border-color', theme.textColor);
+    changeStyle('.input', 'backgroundColor', theme.backgroundColor);
+    changeStyle('.input', 'color', theme.textColor);
+    let list = document.querySelectorAll('.btn');
+    for (let i = 0; i < list.length; i++) {
+        let node = list[i];
+        node.addEventListener('mouseover', (e) => {
+            e.target.style.backgroundColor = theme.textColor;
+            e.target.style.color = theme.backgroundColor;
+        });
+        node.addEventListener('mouseout', (e) => {
+            e.target.style.backgroundColor = theme.backgroundColor;
+            e.target.style.color = theme.textColor;
+        });
+    }
+}
+
+select.addEventListener('change', loadTheme);
+
+function changeStyle(selector, style, value) {
+    let list = document.querySelectorAll(selector);
+    for (let i = 0; i < list.length; i++) {
+        let node = list[i];
+        node['style'][style] = value;
+    }
+}
 
 let typeicons = {
     object: new Image(),
@@ -121,14 +179,4 @@ let typeicons = {
 }
 let theme = '';
 
-function loadIcons() {
-    typeicons.object.src = theme.icons.object;
-    typeicons.array.src = theme.icons.array;
-    typeicons.number.src = theme.icons.number;
-    typeicons.string.src = theme.icons.string;
-    typeicons.boolean.src = theme.icons.boolean;
-    typeicons.nullobj.src = theme.icons.nullobj;
-}
-
-theme = themes[select.selectedOptions[0].value];
-loadIcons();
+loadTheme();

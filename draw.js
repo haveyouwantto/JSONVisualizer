@@ -10,9 +10,34 @@ let indent = 0;
 
 let layers = [];
 
+let errorReg = /at position (\d+)/;
+
+/*
+let singleComment = /(\/\/)([^\n"]*?)((\n)|$)(?![^\s\n"]*["]+)/g;
+let multiComment = /(?<![^\n"]+["])(\/\*)([^]*?)(\*\/)(?![^"\n]+["])/g;
+let nonDec = /([\s\t[:,]*)0([box])([\dabcdef]+)[\s\t]*([,\]}]+|$)/gi;
+let unquotedKey = /([\s\t{[,]+)([^"\s\t{[,]*)(\s*):/g;
+*/
+let javaNumber = /([\s\t[:,]*)([\d.]+)[bdfsl][\s\t]*([,\]}]+|$)/gi;
+
 function draw(json) {
     try {
-        let obj = JSON.parse(json);
+        let obj;
+        let fix = document.getElementById('fix').checked;
+        if (fix) {
+            json = json
+                //.replace(unquotedKey, '$1"$2":')
+                //.replace(nonDec, (a, b, c, d, e) => { try { return b + eval('0' + c + d) + e } catch (e1) { throw new Error('Invaild number "0' + c + d + '"') } })
+                .replace(javaNumber, '$1$2$3');
+            console.log(json);
+            obj = JSON.parse(eval('let e=()=>{return JSON.stringify('+json+')};e();'));
+            let textarea = document.getElementById('text');
+            textarea.value = JSON.stringify(obj, null, 2);
+        } else {
+            obj = JSON.parse(json);
+        }
+
+        console.log(obj);
 
         resolution = parseInt(res.value);
         line = 0;
@@ -37,9 +62,16 @@ function draw(json) {
         indent = ctx.measureText('00').width;
 
         dl.style.display = 'block';
+
         parseType(obj, 0);
     } catch (e) {
-        alert('JSON语法错误:\n' + e);
+        let m = e.toString().match(errorReg);
+        if (m != null) {
+            let i = parseInt(m[1]);
+            if (i < 4) i = 4;
+            alert('JSON语法错误:\n' + e + '\n' + json.substr(i - 4, 8) + '\n    ^');
+        }
+        else alert('JSON语法错误:\n' + e + '\n');
         console.error(e.stack);
     }
 }
