@@ -4,9 +4,18 @@
 <head>
     <link rel="shortcut  icon" type="image/x-icon" href="favicon.ico" media="screen" />
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <link href="style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <title>JSON树状图生成器</title>
 </head>
+
+<body>
+    <ul id="list" class="input border">
+        <li class="btn input transition text">复制属性路径</li>
+        <li class="btn input transition text">复制属性键</li>
+        <li class="btn input transition text">复制属性值</li>
+    </ul>
+    <textarea cols="20" rows="10" id="copy" class="transition border input">用户定义的代码区域</textarea>
+</body>
 
 <body>
     <h1>JSON树状图生成器</h1>
@@ -14,7 +23,7 @@
         主题: <select id="themes" class="transition border input text"></select>
         字体: <input type="text" class="transition border input text" id="font" value="monospace">
         大小: <input type="number" class="transition border input text" id="resolution" value="32" min="1"><br>
-        <div class=""><input type="checkbox" class="" id="fix" value="3">JS eval</div>
+        <div hidden><input type="checkbox" class="" id="fix" value="3">尝试修复json（实验性）</div>
         <textarea id="text" class="transition border input" rows=8 cols=60 placeholder="来一段JSON"></textarea>
         <div>
             <button id="submit" class="transition border input btn text">提交</button>
@@ -22,12 +31,17 @@
         </div>
     </span>
     <a id='dl' class="text">下载</a>
+    <span id="format" class="border"></span>
     <span class="canvas">
         <canvas id="canvas" width="256" height="256"></canvas>
     </span>
-    <script src="theme.js"></script>
-    <script src="draw.js"></script>
-    <script src="download.js"></script>
+    <script src="js/parser.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/manager.js"></script>
+    <script src="js/draw.js"></script>
+    <script src="js/htmlGen.js"></script>
+    <script src="js/download.js"></script>
+    <script src="js/utils.js"></script>
     <script>
         let submit = document.getElementById('submit');
         let clear = document.getElementById('clear');
