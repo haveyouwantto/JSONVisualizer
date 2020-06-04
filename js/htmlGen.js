@@ -25,7 +25,7 @@ function parseTypeHTML(parent, obj, path, depth, key = '', lastItem = false) {
     childDiv.className = 'childrens';
     padding = '';
     for (let i = 0; i < depth; i++) {
-        padding += getBranchChar(layers[i], true);
+        padding += getBranchCharHTML(layers[i], true);
     }
     innerDiv.innerHTML = padding;
 
@@ -76,7 +76,7 @@ function parseTypeHTML(parent, obj, path, depth, key = '', lastItem = false) {
         parent.appendChild(div);
     } else if (type == '[object String]') {
         img.src = typeicons.string.src;
-        innerDiv.appendChild(createKeyValue(key, '"' + obj + '"', theme.stringColor));
+        innerDiv.appendChild(createKeyValue(key, JSON.stringify(obj), theme.stringColor));
         parent.appendChild(div);
     } else if (type == '[object Boolean]') {
         img.src = typeicons.boolean.src;
@@ -127,4 +127,18 @@ function createValue(value, valueColor) {
     valueFont.setAttribute('color', valueColor);
     valueFont.appendChild(document.createTextNode(value));
     return valueFont;
+}
+
+function getBranchCharHTML(layerId, space = false) {
+    let char = space ? '&nbsp;' : '';
+    switch (layerId) {
+        case 1:
+            return '│' + char;
+        case 2:
+            return '├' + char;
+        case 3:
+            return '└' + char;
+        default:
+            return '&nbsp;' + char;
+    }
 }

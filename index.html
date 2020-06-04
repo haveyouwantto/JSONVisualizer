@@ -21,8 +21,11 @@
     <h1>JSON树状图生成器</h1>
     <span id="control" class="border">
         主题: <select id="themes" class="transition border input text"></select>
-        字体: <input type="text" class="transition border input text" id="font" value="monospace">
-        大小: <input type="number" class="transition border input text" id="resolution" value="32" min="1"><br>
+        <div class="image-exclusive">字体: <input type="text" class="transition border input text" id="font"
+                value="monospace">
+            大小: <input type="number" class="transition border input text" id="resolution" value="32" min="1"><br>
+        </div>
+        <div><input type="checkbox" class="" id="image" value="3">图片模式</div>
         <div hidden><input type="checkbox" class="" id="fix" value="3">尝试修复json（实验性）</div>
         <textarea id="text" class="transition border input" rows=8 cols=60 placeholder="来一段JSON"></textarea>
         <div>
@@ -42,34 +45,22 @@
     <script src="js/htmlGen.js"></script>
     <script src="js/download.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/callbacks.js"></script>
     <script>
         let submit = document.getElementById('submit');
         let clear = document.getElementById('clear');
         let textarea = document.getElementById('text');
         let dl = document.getElementById('dl');
         let dls = document.getElementById('dls');
+        let image = document.getElementById('image');
         submit.addEventListener("click", () => {
             draw(textarea.value);
         });
         clear.addEventListener("click", () => {
             textarea.value = '';
         });
-        dl.addEventListener("click", () => {
-            try {
-                let blob = dataURItoBlob(c.toDataURL());
-                let url = window.URL.createObjectURL(blob);
-                let link = document.createElement('a');
-                link.style.display = 'none';
-                link.href = url;
-                link.setAttribute('download', parseInt(new Date().getTime() / 1000) + '.png');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } catch (e) {
-                console.error(e.stack);
-                alert('请使用右键另存为。');
-            }
-        });
+        dl.addEventListener("click", dlCallback);
+        image.addEventListener('change', checkCallback);
     </script>
 </body>
 

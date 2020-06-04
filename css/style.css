@@ -122,3 +122,8 @@ ul {
 	position: absolute;
 	display: none;
 }
+
+.image-exclusive {
+	display: none;
+	flex-direction: column;
+}

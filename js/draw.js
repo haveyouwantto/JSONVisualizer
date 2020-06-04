@@ -135,3 +135,16 @@ function drawBranch(line, depth) {
         ctx.fillText(getBranchChar(layers[i]), (i + 0.5) * indent - offset, line * resolution);
     }
 }
+
+function getBranchChar(layerId, space = false) {
+    switch (layerId) {
+        case 1:
+            return '│';
+        case 2:
+            return '├';
+        case 3:
+            return '└';
+        default:
+            return '';
+    }
+}

@@ -38,7 +38,7 @@ function draw(json) {
         console.log(obj);
         format.innerHTML = "";
 
-        if (html) {
+        if (!image.checked) {
             format.style.display = 'flex';
             c.style.display = 'none';
             resolution = 20;
@@ -111,21 +111,6 @@ function getLength(str) {
 function formatLength(len) {
     if (len == 1) return len + ' entry';
     else return len + ' entries';
-}
-
-
-function getBranchChar(layerId, space = false) {
-    let char = space ? '&nbsp;' : '';
-    switch (layerId) {
-        case 1:
-            return '│' + char;
-        case 2:
-            return '├' + char;
-        case 3:
-            return '└' + char;
-        default:
-            return '&nbsp;' + char;
-    }
 }
 
 function isObjectOrArray(obj) {
