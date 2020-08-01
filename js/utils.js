@@ -1,4 +1,9 @@
-let copy = document.getElementById('copy');
+const _ = selector => {
+    let list = document.querySelectorAll(selector);
+    return list.length == 1 ? list[0] : list;
+}
+
+let copy = _('#copy');
 
 function copyText(value) {
     copy.value = value;

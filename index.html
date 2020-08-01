@@ -38,21 +38,21 @@
     <span class="canvas">
         <canvas id="canvas" width="256" height="256"></canvas>
     </span>
+    <script src="js/utils.js"></script>
     <script src="js/parser.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/manager.js"></script>
     <script src="js/draw.js"></script>
     <script src="js/htmlGen.js"></script>
     <script src="js/download.js"></script>
-    <script src="js/utils.js"></script>
     <script src="js/callbacks.js"></script>
     <script>
-        let submit = document.getElementById('submit');
-        let clear = document.getElementById('clear');
-        let textarea = document.getElementById('text');
-        let dl = document.getElementById('dl');
-        let dls = document.getElementById('dls');
-        let image = document.getElementById('image');
+        let submit = _('#submit');
+        let clear = _('#clear');
+        let textarea = _('#text');
+        let dl = _('#dl');
+        let dls = _('#dls');
+        let image = _('#image');
         submit.addEventListener("click", () => {
             draw(textarea.value);
         });

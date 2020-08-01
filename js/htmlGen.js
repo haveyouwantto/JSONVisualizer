@@ -1,5 +1,5 @@
 
-var listBox = document.getElementById('list');//获取自定义右键菜单
+var listBox = _('#list');//获取自定义右键菜单
 
 
 //关闭右键
@@ -27,7 +27,10 @@ function parseTypeHTML(parent, obj, path, depth, key = '', lastItem = false) {
     for (let i = 0; i < depth; i++) {
         padding += getBranchCharHTML(layers[i], true);
     }
-    innerDiv.innerHTML = padding;
+    let font = document.createElement('font');
+    font.setAttribute('color', theme.branchColor);
+    font.innerHTML = padding;
+    innerDiv.appendChild(font);
 
     layers[depth - 1] = lastItem ? 0 : 1;
 
@@ -115,7 +118,7 @@ function createKeyValue(key, value, valueColor = theme.textColor) {
     keyFont.appendChild(document.createTextNode(key));
     div.appendChild(keyFont);
     let colonFont = document.createElement('font');
-    colonFont.setAttribute('color', theme.keywordColor);
+    colonFont.setAttribute('color', theme.colonColor);
     colonFont.appendChild(document.createTextNode(': '));
     div.appendChild(colonFont);
     div.appendChild(createValue(value, valueColor));

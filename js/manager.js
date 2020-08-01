@@ -1,7 +1,7 @@
-let c = document.getElementById("canvas");
-let format = document.getElementById('format');
-let res = document.getElementById('resolution');
-let f = document.getElementById('font');
+let c = _("#canvas");
+let format = _('#format');
+let res = _('#resolution');
+let f = _('#font');
 let resolution = 16;
 let offset = 0;
 let ctx = c.getContext("2d");
@@ -26,10 +26,10 @@ let javaNumber = /([\s\t[:,]*)([\d.]+)[bdfsl][\s\t]*([,\]}]+|$)/gi;
 function draw(json) {
     try {
         let obj;
-        let fix = document.getElementById('fix').checked;
+        let fix = _('#fix').checked;
         if (fix) {
             obj = new JSONParser(json).parseElement();
-            let textarea = document.getElementById('text');
+            let textarea = _('#text');
             textarea.value = JSON.stringify(obj, null, 2);
         } else {
             obj = JSON.parse(json);
@@ -37,16 +37,19 @@ function draw(json) {
 
         console.log(obj);
         format.innerHTML = "";
+        format.scrollTo(0, 0);
 
         if (!image.checked) {
             format.style.display = 'flex';
             c.style.display = 'none';
+            dl.style.display = 'none';
             resolution = 20;
             format.style.fontSize = resolution + 'px';
             parseTypeHTML(format, obj, '', 0);
         } else {
             format.style.display = 'none';
             c.style.display = 'initial';
+            dl.style.display = 'block';
             resolution = parseInt(res.value);
             line = 0;
             offset = resolution / 8;
@@ -69,7 +72,6 @@ function draw(json) {
             ctx.font = (resolution - 4) + "px " + fontname;
             indent = ctx.measureText('00').width;
 
-            dl.style.display = 'block';
 
             parseType(obj, 0);
         }
